@@ -7,12 +7,14 @@ import com.ni.tiste.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@Transactional(readOnly = true)
 public class UserService {
 
     @Autowired
@@ -21,6 +23,7 @@ public class UserService {
     @Autowired
     JwtUtils jwtUtils;
 
+    @Transactional
     public User saveUser(SignupRequest userRequest){
         String token= jwtUtils.generateTokenFromUser(userRequest.getEmail());
         BCryptPasswordEncoder bCryptPasswordEncoder= new BCryptPasswordEncoder();
