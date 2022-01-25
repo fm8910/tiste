@@ -11,6 +11,7 @@ import java.util.UUID;
 public class UserInfoResponse {
 
     private UUID id;
+    private String name;
     private String email;
     private LocalDateTime created;
     private LocalDateTime lastLogin;
@@ -18,9 +19,10 @@ public class UserInfoResponse {
     private Boolean isActive;
 
 
-    public UserInfoResponse(UUID id, String email, LocalDateTime created,
+    public UserInfoResponse(UUID id,String name, String email, LocalDateTime created,
                             LocalDateTime lastLogin, String token, Boolean isActive) {
         this.id = id;
+        this.name = name;
         this.email = email;
         this.created = created;
         this.lastLogin = lastLogin;
