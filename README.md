@@ -16,3 +16,14 @@ Alternatively you can use the [Spring Boot Maven plugin](https://docs.spring.io/
 ```shell
 mvn spring-boot:run
 ```
+# Check Out the Swagger UI
+
+Open a browser and key in URL:
+
+```
+$ open http://localhost:8080/tiste/swagger-ui/
+```
+
+
+> Note:
+> - All the APIs can be playing through the UI

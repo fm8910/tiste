@@ -1,6 +1,6 @@
 package com.ni.tiste.handleerrors;
 
-import com.ni.tiste.repository.UserRepository;
+import com.ni.tiste.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,10 +11,10 @@ import javax.validation.ConstraintValidatorContext;
 public class UniqueEmailValidator implements ConstraintValidator<UniqueEmail, String> {
 
     @Autowired
-    UserRepository userRepository;
+    UserService userService;
 
     @Override
     public boolean isValid(String email, ConstraintValidatorContext context) {
-        return userRepository.findByEmail(email).isEmpty();
+        return userService.findUserByEmail(email).isEmpty();
     }
 }
