@@ -5,11 +5,11 @@ import com.ni.tiste.payload.SignupRequest;
 import com.ni.tiste.payload.UserInfoResponse;
 import com.ni.tiste.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
-import java.util.UUID;
+import java.util.List;
 
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -30,7 +30,9 @@ public class UsersController {
 
     @GetMapping
     public ResponseEntity<?> getAllUsers() {
-        return ResponseEntity.ok(userService.getAllUsers());
+        List<UserInfoResponse> users = userService.getAllUsers();
+        return !users.isEmpty() ?
+                new ResponseEntity<>(users, HttpStatus.OK) : new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
     }
 
     @PutMapping("/{email}")
@@ -47,9 +49,5 @@ public class UsersController {
         userService.deleteUserByEmail(email);
         return ResponseEntity.ok().build();
     }
-
-
-
-
 
 }
