@@ -40,7 +40,7 @@ public class UserService {
         user.setCreated(LocalDateTime.now());
         user.setIsActive(true);
 
-      return userRepository.save(user);
+       return userRepository.save(user);
     }
 
     public Optional<User> getUserById(UUID id){
