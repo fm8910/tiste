@@ -3,7 +3,7 @@ package com.ni.tiste.service;
 import com.ni.tiste.config.JwtUtils;
 import com.ni.tiste.model.User;
 import com.ni.tiste.payload.SignupRequest;
-import com.ni.tiste.payload.UserInfoResponse;
+import com.ni.tiste.payload.UserResponse;
 import com.ni.tiste.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -51,7 +51,7 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
-    public User replaceUser(String email, SignupRequest userRequest){
+    public User createOrReplaceUser(String email, SignupRequest userRequest){
        return userRepository.findByEmail(email)
                 .map(user -> {
                     user.setName(userRequest.getName());
@@ -68,11 +68,11 @@ public class UserService {
         userRepository.deleteByEmail(email);
     }
 
-    public List<UserInfoResponse> getAllUsers(){
+    public List<UserResponse> getAllUsers(){
         List<User> users = userRepository.findAll();
         return users.
                 stream()
-                .map(user -> new UserInfoResponse(user.getId(),user.getName(),user.getEmail(),
+                .map(user -> new UserResponse(user.getId(),user.getName(),user.getEmail(),
                 user.getCreated(),user.getLastLogin(),user.getToken(),user.getIsActive())).
                 collect(Collectors.toList());
     }

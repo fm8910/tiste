@@ -2,6 +2,7 @@ package com.ni.tiste.payload;
 
 import com.ni.tiste.handleerrors.UniqueEmail;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 import javax.validation.constraints.*;
 import java.util.List;
@@ -30,5 +31,10 @@ public class SignupRequest {
     @Size(min = 1)
     private List<PhoneDTO> phones;
 
-
+    public SignupRequest(String name, String email, String password, List<PhoneDTO> phones) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.phones = phones;
+    }
 }
